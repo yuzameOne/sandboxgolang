@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -16,4 +17,17 @@ func main() {
 		log.Printf("file dont read : %s", err)
 	}
 
+	for _, v := range file {
+
+		newString.WriteByte(v)
+
+		// 10 == "\n"
+		if v == 10 {
+
+			fmt.Println(newString.String())
+
+			newString.Reset()
+
+		}
+	}
 }
