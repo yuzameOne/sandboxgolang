@@ -9,6 +9,11 @@ import (
 
 var newString strings.Builder
 var count int
+var some string
+var newLine byte = '\n'
+var hyphen byte = '-'
+var copyString string
+var lastNumber string
 
 func main() {
 
@@ -22,30 +27,27 @@ func main() {
 
 		newString.WriteByte(v)
 
-		// 10 == "\n"
-		if v == 10 {
+		if v == newLine {
 
-			some := fmt.Sprintln(newString.String())
+			s := fmt.Sprintf("%s", &newString)
 
-			fmt.Print(string(some[9]))
-			fmt.Print(string(some[20]))
-			fmt.Print(string(some[21]))
-			fmt.Print(string(some[22]))
-			// fmt.Print(string(some[23]))
-			//  23 == "\n"
+			for i := 0; i < len(s); i++ {
+				fmt.Printf("%v \n", s[i])
+				fmt.Printf("string data : %s \n", string(s[i]))
+				if s[i] == 10 {
+					lastNumber = s[1 : len(s)-1]
+					fmt.Printf(" print last  number string in loop : %s\n", lastNumber)
+				} else if s[i] == 45 {
+					copyString = s[0:i]
+					fmt.Printf(" print string in loop : %s\n", copyString)
+				}
+			}
 
-			// for key, val := range some {
+			str := strings.NewReader(copyString)
 
-			// 	// 45 == "-"
-			// 	if val == 45 {
-			// 		key = key - 1
-			// 		fmt.Printf("key index : %v\n ", key)
-			// 	} else if val == 10 {
-			// 		key = key - 1
-			// 		fmt.Printf("key index : %v\n", key)
-			// 		break
-			// 	}
-			// }
+			fmt.Printf("length string  copyString : %d \n", str.Len())
+			fmt.Printf("last index  copyString : %s", string(copyString[9]))
+
 			newString.Reset()
 
 			count = count + 1
@@ -55,5 +57,7 @@ func main() {
 		}
 
 	}
+
+	fmt.Println(some)
 
 }
