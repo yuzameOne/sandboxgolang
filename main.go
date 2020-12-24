@@ -5,42 +5,30 @@ import (
 	"strings"
 )
 
-var stringLength int
-var finishSlice []string
+var finish []string
 
 func main() {
 
-	s := "80.92.160.0-80.92.175.255"
+	startString := "80.92.160.0-80.92.175.255"
 
-	// find full  string length
+	// Split string like this [80 92 160 0-80 92 175 255]
+	newString := strings.Split(startString, ".")
 
-	// for i := 0; i < len(s); i++ {
+	//  take  index []string  0-80
+	subStringMiddle := newString[3]
 
-	// 	stringLength = i
-	// 	// fmt.Println(stringLength)
-	// }
+	// Split string like this []string  [0 80]
+	newsubstring := strings.Split(subStringMiddle, "-")
 
-	newString := strings.Split(s, ".")
+	// TODO merge 3 slice in one slice
 
-	substring := newString[3]
-	substringleft := newString[3:]
+	leftSubstring := newString[0:3]
+	rigthSubstring := newString[4:]
 
-	newsubstring := strings.Split(substring, "-")
+	fmt.Println(newsubstring)
 
-	finishSlice := append(finishSlice, newString, substringleft)
+	finish = append(finish, leftSubstring, rigthSubstring...)
 
-	// TODO variable newsubstring append in newString
-	// How copy slice 2 part??????
-
-	fmt.Printf("basic []string : %v \n", newString)
-	fmt.Printf("substring  type string : %v \n", substring)
-	fmt.Printf("copy index value  []string : %v \n", newsubstring)
-
-	fmt.Printf("finish  []string : %v ", finishSlice)
-
-	// fmt.Println(newString[3])
-	// fmt.Println(newString[6])
-
-	// newNewString = append(newNewString, )
+	fmt.Println(finish)
 
 }
