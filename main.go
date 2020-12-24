@@ -6,6 +6,7 @@ import (
 )
 
 var stringLength int
+var finishSlice []string
 
 func main() {
 
@@ -22,17 +23,24 @@ func main() {
 	newString := strings.Split(s, ".")
 
 	substring := newString[3]
+	substringleft := newString[3:]
 
 	newsubstring := strings.Split(substring, "-")
+
+	finishSlice := append(finishSlice, newString, substringleft)
 
 	// TODO variable newsubstring append in newString
 	// How copy slice 2 part??????
 
-	fmt.Println(substring)
-	fmt.Println(newsubstring)
-	fmt.Println(newString)
+	fmt.Printf("basic []string : %v \n", newString)
+	fmt.Printf("substring  type string : %v \n", substring)
+	fmt.Printf("copy index value  []string : %v \n", newsubstring)
 
-	fmt.Println(newString[3])
-	fmt.Println(newString[6])
+	fmt.Printf("finish  []string : %v ", finishSlice)
+
+	// fmt.Println(newString[3])
+	// fmt.Println(newString[6])
+
+	// newNewString = append(newNewString, )
 
 }
