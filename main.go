@@ -5,33 +5,19 @@ import (
 	"strings"
 )
 
-var finish = make([]string, 9)
+var newFinish []string
 
 func main() {
-
 	startString := "80.92.160.0-80.92.175.255"
 
-	// Split string like this [80 92 160 0-80 92 175 255]
-	newString := strings.Split(startString, ".")
+	newString := strings.Split(startString, "-")
 
-	//  take  index []string  0-80
-	subStringMiddle := newString[3]
+	subStringLeft := strings.Split(string(newString[0]), ".")
 
-	// Split string like this []string  [0 80]
-	newsubstring := strings.Split(subStringMiddle, "-")
+	subStringRigth := strings.Split(string(newString[1]), ".")
 
-	// get slice [80 92 160]
-	leftSubstring := newString[0:3]
+	newFinish = append(subStringLeft, subStringRigth...)
 
-	// get slice [92 175 255]
-	rigthSubstring := newString[4:]
-
-	finish = append(leftSubstring, newsubstring...)
-	finish = append(finish, rigthSubstring...)
-
-	// result this [80 92 160 0 80 80 175 255]
-	fmt.Println(finish)
-	//  need result [80 92 160 0 80 92 175 255]
-	fmt.Println(rigthSubstring)
+	fmt.Println(newFinish)
 
 }
