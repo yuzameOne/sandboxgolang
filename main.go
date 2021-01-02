@@ -31,4 +31,14 @@ func main() {
 
 	fmt.Printf("type slice : %T , %v \n", convertStringSliceToInt, convertStringSliceToInt)
 
+	for i := 0; i < 4; i++ {
+		fmt.Println(convertStringSliceToInt[i])
+		for j := i + 4; j < 8; j++ {
+			fmt.Println(convertStringSliceToInt[j])
+			if i != j {
+				break
+			}
+		}
+	}
+
 }
