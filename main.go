@@ -8,6 +8,8 @@ import (
 
 var newFinishSlice []string
 var convertStringSliceToInt = make([]int, len(newFinishSlice))
+var thirdNumber int
+var fourNumber int
 
 func main() {
 	startString := "80.92.160.0-80.92.175.255"
@@ -35,7 +37,11 @@ func main() {
 		fmt.Println(convertStringSliceToInt[i])
 		for j := i + 4; j < 8; j++ {
 			fmt.Println(convertStringSliceToInt[j])
-			if i != j {
+			if i != j && i < j {
+				if i < j {
+					thirdNumber = convertStringSliceToInt[j] - convertStringSliceToInt[i]
+					fmt.Println(thirdNumber)
+				}
 				break
 			}
 		}
