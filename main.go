@@ -45,12 +45,20 @@ func main() {
 		convertStringSliceToInt = append(convertStringSliceToInt, value)
 	}
 
+	// file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+	// if err != nil {
+	// 	log.Fatalf("file not create : %s", err)
+	// }
+
 	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + difference[0]); i++ {
-		fmt.Println(i)
+		convertStringSliceToInt[2] = i
+		fmt.Println(convertStringSliceToInt)
 		for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + difference[1]); j++ {
 
-			fmt.Println(j)
-			if j > (j + 1) {
+			convertStringSliceToInt[3] = j
+			fmt.Println(convertStringSliceToInt)
+			if j == difference[1] {
+				convertStringSliceToInt[3] = 0
 				break
 			}
 		}
