@@ -9,7 +9,7 @@ import (
 )
 
 // TODO:
-//  
+//
 
 var differenceBetweenIndex []int
 var convertStringSliceToInt []int
@@ -24,6 +24,8 @@ func main() {
 	subStringLeft := strings.Split(string(newString[0]), ".")
 
 	subStringRigth := strings.Split(string(newString[1]), ".")
+
+	twoIndexStaticNumber, _ := strconv.Atoi(subStringLeft[2])
 
 	fmt.Sprintln(subStringRigth) // compiler scold, not use variable
 	fmt.Sprintln(subStringLeft)  // compiler scold, not use variable
@@ -49,7 +51,12 @@ func main() {
 	}
 
 	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
+
+		if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
+			break
+		}
 		convertStringSliceToInt[2] = i
+
 		for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
 
 			convertStringSliceToInt[3] = j
@@ -61,19 +68,13 @@ func main() {
 				convertIntSliceToString = append(convertIntSliceToString, value)
 			}
 
-			fmt.Printf("type :%T , value : %s \n", convertIntSliceToString, convertIntSliceToString)
-
 			finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
-
-			fmt.Println(finishStringWriteToFile)
 
 			for i := 0; i < len(convertIntSliceToString); {
 
 				convertIntSliceToString[len(convertIntSliceToString)-1] = " "
 				convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
-				fmt.Println(convertIntSliceToString)
 			}
-			fmt.Printf("type :%T , value : %s \n", convertIntSliceToString, convertIntSliceToString)
 
 			file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
 			if err != nil {
@@ -88,6 +89,7 @@ func main() {
 			}
 
 		}
+
 	}
 
 }
