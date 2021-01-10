@@ -7,11 +7,12 @@ import (
 )
 
 // TODO:
-//  take for , and  twist   index  0 and 1
 //  write file
 
-var difference []int
+var differenceBetweenIndex []int
 var convertStringSliceToInt []int
+var convertIntSliceToString []string
+var finishStringWriteToFile string
 
 func main() {
 	startString := "80.92.160.0-80.92.175.255"
@@ -32,7 +33,7 @@ func main() {
 			left, _ := strconv.Atoi(subStringLeft[i])
 			right, _ := strconv.Atoi(subStringRigth[i])
 
-			difference = append(difference, -(left - right))
+			differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
 
 		}
 
@@ -45,23 +46,44 @@ func main() {
 		convertStringSliceToInt = append(convertStringSliceToInt, value)
 	}
 
-	// file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
-	// if err != nil {
-	// 	log.Fatalf("file not create : %s", err)
-	// }
-
-	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + difference[0]); i++ {
+	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
 		convertStringSliceToInt[2] = i
-		fmt.Println(convertStringSliceToInt)
-		for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + difference[1]); j++ {
+		for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
 
 			convertStringSliceToInt[3] = j
-			fmt.Println(convertStringSliceToInt)
-			if j == difference[1] {
+
+			for _, val := range convertStringSliceToInt {
+
+				value := strconv.Itoa(val)
+
+				convertIntSliceToString = append(convertIntSliceToString, value)
+			}
+
+			fmt.Printf("type :%T , value : %s \n", convertIntSliceToString, convertIntSliceToString)
+
+			finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
+
+			fmt.Println(finishStringWriteToFile)
+
+			for i := 0; i < len(convertIntSliceToString); {
+
+				convertIntSliceToString[len(convertIntSliceToString)-1] = " "
+				convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
+				fmt.Println(convertIntSliceToString)
+			}
+			fmt.Printf("type :%T , value : %s \n", convertIntSliceToString, convertIntSliceToString)
+
+			if j == differenceBetweenIndex[1] {
 				convertStringSliceToInt[3] = 0
 				break
 			}
+
 		}
 	}
 
 }
+
+// file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+// if err != nil {
+// 	log.Fatalf("file not create : %s", err)
+// }
