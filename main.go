@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"strconv"
 	"strings"
 )
 
 // TODO:
-//  write file
+//  
 
 var differenceBetweenIndex []int
 var convertStringSliceToInt []int
@@ -73,6 +75,13 @@ func main() {
 			}
 			fmt.Printf("type :%T , value : %s \n", convertIntSliceToString, convertIntSliceToString)
 
+			file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+			if err != nil {
+				log.Fatalf("file not create : %s", err)
+			}
+
+			file.WriteString(finishStringWriteToFile + "\n")
+
 			if j == differenceBetweenIndex[1] {
 				convertStringSliceToInt[3] = 0
 				break
@@ -82,8 +91,3 @@ func main() {
 	}
 
 }
-
-// file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
-// if err != nil {
-// 	log.Fatalf("file not create : %s", err)
-// }
