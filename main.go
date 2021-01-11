@@ -9,7 +9,8 @@ import (
 )
 
 // TODO:
-//
+// read uparseip.txt 
+//  swap variable startString in loop 
 
 var differenceBetweenIndex []int
 var convertStringSliceToInt []int
@@ -50,7 +51,7 @@ func main() {
 		convertStringSliceToInt = append(convertStringSliceToInt, value)
 	}
 
-	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
+	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ { 
 
 		if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
 			break
