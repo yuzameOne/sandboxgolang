@@ -1,96 +1,92 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"os"
-	"strconv"
-	"strings"
-)
+import "project/sandboxgolang/read"
 
 // TODO:
-// read uparseip.txt 
-//  swap variable startString in loop 
+// read uparseip.txt
+//  swap variable startString in loop
 
-var differenceBetweenIndex []int
-var convertStringSliceToInt []int
-var convertIntSliceToString []string
-var finishStringWriteToFile string
+// var differenceBetweenIndex []int
+// var convertStringSliceToInt []int
+// var convertIntSliceToString []string
+// var finishStringWriteToFile string
 
 func main() {
-	startString := "80.92.160.0-80.92.175.255"
 
-	newString := strings.Split(startString, "-")
+	read.Read()
+	// startString := "80.92.160.0-80.92.175.255"
 
-	subStringLeft := strings.Split(string(newString[0]), ".")
+	// newString := strings.Split(startString, "-")
 
-	subStringRigth := strings.Split(string(newString[1]), ".")
+	// subStringLeft := strings.Split(string(newString[0]), ".")
 
-	twoIndexStaticNumber, _ := strconv.Atoi(subStringLeft[2])
+	// subStringRigth := strings.Split(string(newString[1]), ".")
 
-	fmt.Sprintln(subStringRigth) // compiler scold, not use variable
-	fmt.Sprintln(subStringLeft)  // compiler scold, not use variable
+	// twoIndexStaticNumber, _ := strconv.Atoi(subStringLeft[2])
 
-	for i := 0; i < len(subStringLeft); i++ {
+	// fmt.Sprintln(subStringRigth) // compiler scold, not use variable
+	// fmt.Sprintln(subStringLeft)  // compiler scold, not use variable
 
-		if subStringLeft[i] != subStringRigth[i] {
+	// for i := 0; i < len(subStringLeft); i++ {
 
-			left, _ := strconv.Atoi(subStringLeft[i])
-			right, _ := strconv.Atoi(subStringRigth[i])
+	// 	if subStringLeft[i] != subStringRigth[i] {
 
-			differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
+	// 		left, _ := strconv.Atoi(subStringLeft[i])
+	// 		right, _ := strconv.Atoi(subStringRigth[i])
 
-		}
+	// 		differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
 
-	}
+	// 	}
 
-	for _, val := range subStringLeft {
+	// }
 
-		value, _ := strconv.Atoi(val)
+	// for _, val := range subStringLeft {
 
-		convertStringSliceToInt = append(convertStringSliceToInt, value)
-	}
+	// 	value, _ := strconv.Atoi(val)
 
-	for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ { 
+	// 	convertStringSliceToInt = append(convertStringSliceToInt, value)
+	// }
 
-		if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
-			break
-		}
-		convertStringSliceToInt[2] = i
+	// for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
 
-		for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
+	// 	if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
+	// 		break
+	// 	}
+	// 	convertStringSliceToInt[2] = i
 
-			convertStringSliceToInt[3] = j
+	// 	for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
 
-			for _, val := range convertStringSliceToInt {
+	// 		convertStringSliceToInt[3] = j
 
-				value := strconv.Itoa(val)
+	// 		for _, val := range convertStringSliceToInt {
 
-				convertIntSliceToString = append(convertIntSliceToString, value)
-			}
+	// 			value := strconv.Itoa(val)
 
-			finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
+	// 			convertIntSliceToString = append(convertIntSliceToString, value)
+	// 		}
 
-			for i := 0; i < len(convertIntSliceToString); {
+	// 		finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
 
-				convertIntSliceToString[len(convertIntSliceToString)-1] = " "
-				convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
-			}
+	// 		for i := 0; i < len(convertIntSliceToString); {
 
-			file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
-			if err != nil {
-				log.Fatalf("file not create : %s", err)
-			}
+	// 			convertIntSliceToString[len(convertIntSliceToString)-1] = " "
+	// 			convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
+	// 		}
 
-			file.WriteString(finishStringWriteToFile + "\n")
+	// 		file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+	// 		if err != nil {
+	// 			log.Fatalf("file not create : %s", err)
+	// 		}
 
-			if j == differenceBetweenIndex[1] {
-				convertStringSliceToInt[3] = 0
-				break
-			}
+	// 		file.WriteString(finishStringWriteToFile + "\n")
 
-		}
+	// 		if j == differenceBetweenIndex[1] {
+	// 			convertStringSliceToInt[3] = 0
+	// 			break
+	// 		}
 
-	}
+	// 	}
+
+	// }
 
 }
