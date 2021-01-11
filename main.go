@@ -1,92 +1,118 @@
 package main
 
-import "project/sandboxgolang/read"
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"strings"
+)
 
 // TODO:
-// read uparseip.txt
-//  swap variable startString in loop
+// 72 line code , when twoIndexStaticNumber equal subStringRight[2]
+//  programm  panic runtime error
+//  debug what shit)))
 
-// var differenceBetweenIndex []int
-// var convertStringSliceToInt []int
-// var convertIntSliceToString []string
-// var finishStringWriteToFile string
+var differenceBetweenIndex []int
+var convertStringSliceToInt []int
+var convertIntSliceToString []string
+var finishStringWriteToFile string
+var parseIPLinesFile []string
 
 func main() {
 
-	read.Read()
-	// startString := "80.92.160.0-80.92.175.255"
+	file, err := os.Open("unparseip.txt")
 
-	// newString := strings.Split(startString, "-")
+	if err != nil {
+		log.Fatal("file not Open", err)
+	}
 
-	// subStringLeft := strings.Split(string(newString[0]), ".")
+	scanner := bufio.NewScanner(file)
 
-	// subStringRigth := strings.Split(string(newString[1]), ".")
+	scanner.Split(bufio.ScanLines)
 
-	// twoIndexStaticNumber, _ := strconv.Atoi(subStringLeft[2])
+	for scanner.Scan() {
+		parseIPLinesFile = append(parseIPLinesFile, scanner.Text())
+	}
+	fmt.Println(len(parseIPLinesFile))
+	for i := 0; i < len(parseIPLinesFile); i++ {
 
-	// fmt.Sprintln(subStringRigth) // compiler scold, not use variable
-	// fmt.Sprintln(subStringLeft)  // compiler scold, not use variable
+		startString := parseIPLinesFile[i]
 
-	// for i := 0; i < len(subStringLeft); i++ {
+		newString := strings.Split(startString, "-")
 
-	// 	if subStringLeft[i] != subStringRigth[i] {
+		subStringLeft := strings.Split(string(newString[0]), ".")
 
-	// 		left, _ := strconv.Atoi(subStringLeft[i])
-	// 		right, _ := strconv.Atoi(subStringRigth[i])
+		subStringRigth := strings.Split(string(newString[1]), ".")
 
-	// 		differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
+		twoIndexStaticNumber, _ := strconv.Atoi(subStringLeft[2])
 
-	// 	}
+		fmt.Sprintln(subStringRigth) // compiler scold, not use variable
+		fmt.Sprintln(subStringLeft)  // compiler scold, not use variable
 
-	// }
+		for i := 0; i < len(subStringLeft); i++ {
 
-	// for _, val := range subStringLeft {
+			if subStringLeft[i] != subStringRigth[i] {
 
-	// 	value, _ := strconv.Atoi(val)
+				left, _ := strconv.Atoi(subStringLeft[i])
+				right, _ := strconv.Atoi(subStringRigth[i])
 
-	// 	convertStringSliceToInt = append(convertStringSliceToInt, value)
-	// }
+				differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
 
-	// for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
+			}
 
-	// 	if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
-	// 		break
-	// 	}
-	// 	convertStringSliceToInt[2] = i
+		}
 
-	// 	for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
+		for _, val := range subStringLeft {
 
-	// 		convertStringSliceToInt[3] = j
+			value, _ := strconv.Atoi(val)
 
-	// 		for _, val := range convertStringSliceToInt {
+			convertStringSliceToInt = append(convertStringSliceToInt, value)
+		}
 
-	// 			value := strconv.Itoa(val)
+		for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
 
-	// 			convertIntSliceToString = append(convertIntSliceToString, value)
-	// 		}
+			if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
+				break
+			}
+			convertStringSliceToInt[2] = i
 
-	// 		finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
+			for j := convertStringSliceToInt[3]; j <= (convertStringSliceToInt[3] + differenceBetweenIndex[1]); j++ {
 
-	// 		for i := 0; i < len(convertIntSliceToString); {
+				convertStringSliceToInt[3] = j
 
-	// 			convertIntSliceToString[len(convertIntSliceToString)-1] = " "
-	// 			convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
-	// 		}
+				for _, val := range convertStringSliceToInt {
 
-	// 		file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
-	// 		if err != nil {
-	// 			log.Fatalf("file not create : %s", err)
-	// 		}
+					value := strconv.Itoa(val)
 
-	// 		file.WriteString(finishStringWriteToFile + "\n")
+					convertIntSliceToString = append(convertIntSliceToString, value)
+				}
 
-	// 		if j == differenceBetweenIndex[1] {
-	// 			convertStringSliceToInt[3] = 0
-	// 			break
-	// 		}
+				finishStringWriteToFile = strings.Join(convertIntSliceToString, ".")
 
-	// 	}
+				for i := 0; i < len(convertIntSliceToString); {
 
-	// }
+					convertIntSliceToString[len(convertIntSliceToString)-1] = " "
+					convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
+				}
 
+				file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+				if err != nil {
+					log.Fatalf("file not create : %s", err)
+				}
+
+				file.WriteString(finishStringWriteToFile + "\n")
+
+				if j == differenceBetweenIndex[1] {
+					convertStringSliceToInt[3] = 0
+					break
+				}
+
+			}
+
+		}
+
+	}
+	defer file.Close()
 }
