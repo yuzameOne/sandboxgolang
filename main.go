@@ -66,9 +66,19 @@ func main() {
 				right, _ := strconv.Atoi(subStringRigth[i])
 
 				differenceBetweenIndex = append(differenceBetweenIndex, -(left - right))
-				fmt.Println(differenceBetweenIndex)
+
 			}
 
+		}
+
+		if len(convertStringSliceToInt) != 0 {
+			fmt.Printf("slice before for loop : %v \n", convertStringSliceToInt)
+			for i := 0; i < 4; i++ {
+
+				convertStringSliceToInt = convertStringSliceToInt[:len(convertStringSliceToInt)-1]
+			}
+
+			fmt.Printf("slice after for loop : %v \n", convertStringSliceToInt)
 		}
 
 		for _, val := range subStringLeft {
@@ -76,11 +86,17 @@ func main() {
 			value, _ := strconv.Atoi(val)
 
 			convertStringSliceToInt = append(convertStringSliceToInt, value)
+
+			fmt.Println(convertStringSliceToInt)
+		}
+
+		file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
+		if err != nil {
+			log.Fatalf("file not create : %s", err)
 		}
 
 		for i = convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
-			fmt.Println(convertStringSliceToInt)
-			fmt.Println(differenceBetweenIndex)
+
 			if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
 				break
 			}
@@ -105,15 +121,11 @@ func main() {
 					convertIntSliceToString = convertIntSliceToString[:len(convertIntSliceToString)-1]
 				}
 
-				file, err := os.OpenFile("finishIpDiap.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0755)
-				if err != nil {
-					log.Fatalf("file not create : %s", err)
-				}
-
 				file.WriteString(finishStringWriteToFile + "\n")
 
 				if j == differenceBetweenIndex[1] {
 					convertStringSliceToInt[3] = 0
+
 					break
 				}
 
