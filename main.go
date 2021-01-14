@@ -10,8 +10,6 @@ import (
 )
 
 // TODO:
-// remove element  in loop  differenceBetweenIndex []int ( added like this [0 255 0 15])
-// remove element  in loop  convertStringSliceToInt []int (added like this [5 100 67 0 82 162 35 240]  )
 
 var differenceBetweenIndex []int
 var convertStringSliceToInt []int
@@ -28,6 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatal("file not Open", err)
 	}
+
 	//  read file inside all bytes
 	scanner := bufio.NewScanner(file)
 
@@ -38,6 +37,9 @@ func main() {
 	for scanner.Scan() {
 		parseIPLinesFile = append(parseIPLinesFile, scanner.Text())
 	}
+
+	// close file
+	defer file.Close()
 
 	//  read []string  in loop
 	for i := 0; i < len(parseIPLinesFile); i++ {
@@ -72,13 +74,10 @@ func main() {
 		}
 
 		if len(convertStringSliceToInt) != 0 {
-			fmt.Printf("slice before for loop : %v \n", convertStringSliceToInt)
 			for i := 0; i < 4; i++ {
 
 				convertStringSliceToInt = convertStringSliceToInt[:len(convertStringSliceToInt)-1]
 			}
-
-			fmt.Printf("slice after for loop : %v \n", convertStringSliceToInt)
 		}
 
 		for _, val := range subStringLeft {
@@ -95,7 +94,7 @@ func main() {
 			log.Fatalf("file not create : %s", err)
 		}
 
-		for i = convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
+		for i := convertStringSliceToInt[2]; i <= (convertStringSliceToInt[2] + differenceBetweenIndex[0]); i++ {
 
 			if i == (twoIndexStaticNumber+differenceBetweenIndex[0])+1 {
 				break
@@ -134,5 +133,4 @@ func main() {
 		}
 
 	}
-	defer file.Close()
 }
