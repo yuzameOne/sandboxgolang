@@ -40,6 +40,7 @@ func main() {
 
 	// close file
 	defer file.Close()
+	defer os.Exit(3)
 
 	//  read []string  in loop
 	for i := 0; i < len(parseIPLinesFile); i++ {
