@@ -10,6 +10,7 @@ import (
 )
 
 // TODO:
+// write a comment above each line
 
 var differenceBetweenIndex []int
 var convertStringSliceToInt []int
