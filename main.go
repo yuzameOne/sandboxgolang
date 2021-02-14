@@ -1,37 +1,39 @@
 package main
 
 import (
-	"flag"
-	"fmt"
+	"bufio"
 	"log"
 	"os"
 )
 
+var rangeIp = make(map[int]string)
+var counMapIndex int
+
 func main() {
 
-	path, err := os.Getwd()
+	//  open file
+	file, err := os.Open("example.txt")
 
 	if err != nil {
-		log.Println(err)
+		log.Fatal("file not open", err)
 	}
 
-	var argOne string
-	flag.StringVar(&argOne, "pathtofile", "", "path to file ")
+	//  ...
+	scanner := bufio.NewScanner(file)
+	//  ...
+	scanner.Split(bufio.ScanLines)
 
-	if argOne != "" {
-		fmt.Println("the first argument is missing")
-		os.Exit(3)
+	//  scan and write in map  string
+	for scanner.Scan() {
+
+		counMapIndex = counMapIndex + 1
+
+		rangeIp[counMapIndex] = scanner.Text()
 	}
 
-	var argTwo string
-	flag.StringVar(&argTwo, "pathtosavefile", "", "path to file ")
+	defer file.Close()
 
-	flag.Parse()
-
-	if argTwo == "" {
-		argTwo = path + "/new_ip_" + argOne
-	}
-
-	fmt.Println(argOne)
-	fmt.Println(argTwo)
+	// for key, val := range rangeIp {
+	// 	fmt.Printf("key %d , value %s \n", key, val)
+	// }
 }
