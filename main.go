@@ -4,16 +4,15 @@ import (
 	"bufio"
 	"log"
 	"os"
-	"sync"
 )
 
 var chanInt = make(chan int)
 var rangeIp = make(map[int]string)
 var counMapIndex int
-var mu sync.Mutex
+
+// var mu sync.Mutex
 
 // TODO
-// написать benchmark на скорость
 // добавить в файл до 100 строк example.txt
 // fan in / fan out  посмотреть отличие
 // написать benchmark на скорость и сравнить на скорость
