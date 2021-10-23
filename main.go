@@ -9,6 +9,19 @@ var newCustomString strings.Builder
 var subSlice []string
 
 func main() {
+
+	one, two := "0", "1"
+
+	fmt.Printf("one : %s, two : %s  \n", one, two)
+
+	fmt.Println(&one, &two)
+
+	one, two = "2", "3"
+
+	fmt.Printf("one : %s, two : %s  \n", one, two)
+
+	fmt.Println(&one, &two)
+
 	// f, err := os.Open("example.txt")
 
 	// if err != nil {
@@ -31,28 +44,28 @@ func main() {
 
 	// fmt.Println(stringRange)
 
-	str := "5.100.67.0-5.100.67.255"
+	// str := "5.100.67.0-5.100.67.255"
 
-	for index, value := range str {
+	// for index, value := range str {
 
-		if value == 46 || value == 45 {
+	// 	if value == 46 || value == 45 {
 
-			subSlice = append(subSlice, newCustomString.String())
-			newCustomString.Reset()
-		}
+	// 		subSlice = append(subSlice, newCustomString.String())
+	// 		newCustomString.Reset()
+	// 	}
 
-		if value != 46 && value != 45 {
+	// 	if value != 46 && value != 45 {
 
-			newCustomString.WriteByte(str[index])
+	// 		newCustomString.WriteByte(str[index])
 
-			if len(str)-1 == index {
-				subSlice = append(subSlice, newCustomString.String())
-			}
+	// 		if len(str)-1 == index {
+	// 			subSlice = append(subSlice, newCustomString.String())
+	// 		}
 
-		}
+	// 	}
 
-	}
-	fmt.Println(subSlice[1])
+	// }
+	// fmt.Println(subSlice[1])
 
 	// index 2,3 and 6,7
 	// нужно в for сравнивать СТРОКИ index 2,3 and 6,7 если меньше  конвертировать в int, инкрементить
